@@ -1,0 +1,15 @@
+[Unit]
+Description=Tunel ngrok para el backend de lista de la compra
+After=network.target lista-compra-backend.service
+Requires=lista-compra-backend.service
+
+[Service]
+Type=simple
+# Cambia TU_DOMINIO por el dominio estatico gratuito que reserves en el panel de ngrok
+ExecStart=/usr/local/bin/ngrok http 8080 --domain=TU_DOMINIO.ngrok-free.app
+Restart=on-failure
+RestartSec=5
+User=TU_USUARIO
+
+[Install]
+WantedBy=multi-user.target
